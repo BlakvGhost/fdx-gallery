@@ -11,6 +11,11 @@ const router = createRouter({
       redirect: {name: 'auth'}
     },
     {
+      path: '/gallery',
+      name: 'gallery',
+      component: () => import('@/views/gallery/GalleryView.vue')
+    },
+    {
       path: '/auth',
       children: [
         {
