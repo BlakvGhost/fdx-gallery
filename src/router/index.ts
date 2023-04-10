@@ -8,7 +8,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      redirect: {name: 'auth'}
+      redirect: { name: 'auth' }
     },
     {
       path: '/gallery',
@@ -20,21 +20,21 @@ const router = createRouter({
       children: [
         {
           path: '',
-          name:'auth',
-          redirect: {name: 'login'}
+          name: 'auth',
+          redirect: { name: 'login' }
         },
         {
           path: 'register',
-          name:'register',
+          name: 'register',
           component: RegisterView
         },
         {
-          path:'login',
-          name:'login',
+          path: 'login',
+          name: 'login',
           component: LoginView
         }
       ]
-    },
+    }
   ]
 })
 

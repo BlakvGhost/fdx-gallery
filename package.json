@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "bootstrap": "^5.2.3",
-    "photoswipe": "^5.3.7",
+    "lightgallery": "^2.7.1",
     "pinia": "^2.0.32",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6"
