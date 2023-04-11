@@ -5,9 +5,9 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>gGallery - Stocker en toute securité vos fichiers</title>
+  <title>fdx-Gallery - Stocker en toute securité vos fichiers</title>
   <meta name="description"
-    content="gGallery un espace de stockage en toute securité de vos fichiers avec multiple fonctionnalité">
+    content="fdx-Gallery un espace de stockage en toute securité de vos fichiers avec multiple fonctionnalité">
   <meta name="author" content="Kabirou ALASSANE" />
   <meta name="keywords" content="gallery,webapp,kabirou, kabirou alassane">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -16,10 +16,33 @@
   <link rel="manifest" href="/site.webmanifest">
   <meta name="robots" content="index">
   <meta name="robots" content="follow">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/7.2.96/css/materialdesignicons.min.css" integrity="sha512-LX0YV/MWBEn2dwXCYgQHrpa9HJkwB+S+bnBpifSOTO1No27TqNMKYoAn6ff2FBh03THAzAiiCwQ+aPX+/Qt/Ow==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/7.2.96/css/materialdesignicons.min.css"
+    integrity="sha512-LX0YV/MWBEn2dwXCYgQHrpa9HJkwB+S+bnBpifSOTO1No27TqNMKYoAn6ff2FBh03THAzAiiCwQ+aPX+/Qt/Ow=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
+  <script>
+    const defaultThemeMode = "light";
+    let themeMode;
+    if (document.documentElement) {
+      if (document.documentElement.hasAttribute("data-bs-theme-mode")) {
+        themeMode = document.documentElement.getAttribute("data-bs-theme-mode");
+      } else {
+        if (localStorage.getItem("data-bs-theme") !== null) {
+          themeMode = localStorage.getItem("data-bs-theme");
+        } else {
+          themeMode = defaultThemeMode;
+        }
+      }
+      if (themeMode === "system") {
+        themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      document.documentElement.setAttribute("data-bs-theme", themeMode);
+      localStorage.setItem("data-bs-theme", themeMode);
+    }
+  </script>
   <div id="app"></div>
   <script type="module" src="/src/main.ts"></script>
 </body>

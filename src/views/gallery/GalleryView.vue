@@ -3,46 +3,43 @@ import Lightgallery from 'lightgallery/vue'
 import lgZoom from 'lightgallery/plugins/zoom'
 import lgThumbnail from 'lightgallery/plugins/thumbnail';
 import type { Photo } from '@/types/Media'
+import UploadFileModal from '@/components/UploadFilesComponent.vue'
 </script>
 <template>
   <div class="container-fluid bg-light position-relative" style="min-height: 100vh;">
-    <div class="position-absolute bottom-0 end-0" style="z-index: 1000;">
-      <div class="p-4 m-3 shadow rounded bg-midnightblue d-none fade-in-down" id="menuToDisplayUserMenu" style="font-size: 1.3rem;">
-        <div class="my-2 d-flex justify-content-between">
-          <a href="javascript:void(0)"
-            class="text-decoration-none text-lightblue-hover-light text-lightblue fw-bolder mx-2"><i
-              class="mdi mdi-brightness-4 fw-bold fs-1x"></i></a>
-          <a href="javascript:void(0)" class="text-decoration-none text-lightblue text-lightblue-hover-light mb-4"><i
-              class="mdi mdi-home-circle-outline fw-bold fs-1x"></i></a>
-          <a href="javascript:void(0)"
-            class="text-decoration-none text-lightblue-hover-light text-lightblue fw-bolder mx-2"><i
-              class="mdi mdi-share-variant-outline fw-bold fs-1x"></i></a>
+    <div class="position-fixed bottom-0 end-0" style="z-index: 1000;">
+      <div class="p-4 m-3 shadow rounded bg-midnightblue d-none fade-in-down" id="menuToDisplayUserMenu"
+        style="font-size: 1.3rem;">
+        <div class="border-bottom pb-3 text-center text-light">
+          <span>Welcome BlakvGhost <br> To Fdx-Gallery!</span>
         </div>
         <div class="text-center">
           <div class="d-flex justify-content-between">
-            <a href="javascript:void(0)"
+            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#fdxUploadFileArea"
               class="text-decoration-none text-lightblue-hover-light text-lightblue fw-bolder mx-2"><i
                 class="mdi mdi-cloud-upload fw-bold fs-1x d-block"></i> Upload</a>
             <a href="javascript:void(0)"
               class="text-decoration-none text-lightblue-hover-light text-lightblue fw-bolder m-3"><i
                 class="mdi mdi-logout fw-bold fs-1x d-block"></i> Logout</a>
-            <a href="javascript:void(0)"
+            <a href="javascript:void(0)" @click="switchMode"
               class="text-decoration-none text-lightblue-hover-light text-lightblue mx-2 fw-bolder"><i
-                class="mdi mdi-cog fw-bold fs-1x d-block"></i>Setting </a>
+                class="mdi mdi-brightness-4 fw-bold fs-1x d-block"></i>Dark</a>
           </div>
         </div>
-        <ul class="list-group">
-          <li class="text-lightblue fw-bolder list-unstyled">
-            <u>Username</u> :
-            <span>BlakvGhost</span>
-          </li>
-          <li class="text-lightblue fw-bolder list-unstyled">
-            <u>Storage</u> :
-            <span>17Mb/2Go</span>
-          </li>
-        </ul>
+        <div class="border-top py-3">
+          <ul class="list-unstyled">
+            <li class="text-lightblue fw-bolder">
+              <u>Username</u> :
+              <span>BlakvGhost</span>
+            </li>
+            <li class="text-lightblue fw-bolder">
+              <u>Storage</u> :
+              <span>17Mb/2Go</span>
+            </li>
+          </ul>
+        </div>
       </div>
-      <div class="d-flex">
+      <div class="d-flex me-2">
         <div @click="displayUserOverlayMenu" id="btnToDisplayUserMenu"
           class="mx-auto transition-1x mb-3 shadow rounded-circle bg-midnightblue text-lightblue-hover-light text-lightblue text-center"
           style="font-size: 4rem;height: 100px;width: 100px;">
@@ -60,6 +57,9 @@ import type { Photo } from '@/types/Media'
         <img className="img-responsive" :src="item.thumbnail" :alt="item.alt" class="w-100 h-100" />
       </div>
     </lightgallery>
+  </div>
+  <div class="modal-container">
+    <UploadFileModal></UploadFileModal>
   </div>
 </template>
 
@@ -124,6 +124,18 @@ export default {
       this.displayOverlayMenu = false;
       icon?.classList.remove('mdi-close-outline');
       menu?.classList.add('d-none');
+    },
+    switchMode: function() {
+
+      const $body = document.documentElement;
+      const themeMode = localStorage.getItem('data-bs-theme');
+
+      if(themeMode == 'light') {
+        localStorage.setItem('data-bs-theme', 'dark')
+        return $body?.setAttribute('data-bs-theme', 'dark');
+      }
+      $body?.setAttribute('data-bs-theme', 'light');
+      localStorage.setItem('data-bs-theme', 'light')
     }
   },
   watch: {
