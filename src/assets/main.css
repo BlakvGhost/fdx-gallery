@@ -1,1 +1,18 @@
 @import './base.css';
+
+.text-midnightblue {
+    color: var(--midmightblue);
+}
+.text-lightblue {
+    color: var(--lightblue);
+}
+.bg-midnightblue {
+    background-color: var(--midmightblue);
+}
+.fs-1x {
+    font-size: 1.5rem;
+}
+.text-lightblue-hover-light:hover {
+    color: var(--bs-light);
+    transition: .5s ease-in;
+}
