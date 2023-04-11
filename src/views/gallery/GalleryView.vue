@@ -1,20 +1,32 @@
 <script setup lang="ts">
-import Gallery from '@/components/GalleryComponent.vue'
+import Lightgallery from 'lightgallery/vue'
+import lgZoom from 'lightgallery/plugins/zoom'
+import lgThumbnail from 'lightgallery/plugins/thumbnail';
 import type { Photo } from '@/types/Media'
 </script>
 <template>
-  <Gallery :medias="images"></Gallery>
+  <div class="container-fluid bg-dark" style="min-height: 100vh;">
+    <lightgallery class="row row-cols-1 row-cols-md-3" :settings="{ speed: 500, plugins: plugins, thumbnail: true }"
+      :onInit="onInit" :onBeforeSlide="onBeforeSlide">
+      <div class="col" v-for="item in photos" :key="item.id" :data-lg-size="item.size" className="gallery-item"
+        :data-src="item.src">
+        <img className="img-responsive" :src="item.thumbnail" :alt="item.alt" class="w-100 h-100" />
+      </div>
+    </lightgallery>
+  </div>
 </template>
 
 <script lang="ts">
+let lightGallery: any = null
 export default {
   data() {
     return {
-      images: Array<Photo>()
+      plugins: [lgZoom, lgThumbnail],
+      photos: Array<Photo>()
     }
   },
   mounted() {
-    this.images = [
+    this.photos = [
       {
         id: 1,
         size: '1400-800',
@@ -41,10 +53,29 @@ export default {
       }
     ]
   },
-  methods: {}
+  methods: {
+    onInit: (detail: any) => {
+      lightGallery = detail.instance
+    },
+    onBeforeSlide: (detail: any) => {
+      const { index, prevIndex } = detail
+      console.log(index, prevIndex)
+    },
+    updateSlides: function () {
+      this.photos = [...this.photos]
+      lightGallery.refresh()
+    }
+  },
+  watch: {
+    photos() {
+      this.$nextTick(() => {
+        lightGallery.refresh()
+      })
+    }
+  },
 }
 </script>
-<style lang="css" scoped>
+<style>
 @import 'lightgallery/css/lightgallery.css';
 @import 'lightgallery/css/lg-thumbnail.css';
 @import 'lightgallery/css/lg-zoom.css';
