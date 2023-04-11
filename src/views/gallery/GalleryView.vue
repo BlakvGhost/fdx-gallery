@@ -23,7 +23,7 @@ import UploadFileModal from '@/components/UploadFilesComponent.vue'
                 class="mdi mdi-logout fw-bold fs-1x d-block"></i> Logout</a>
             <a href="javascript:void(0)" @click="switchMode"
               class="text-decoration-none text-lightblue-hover-light text-lightblue mx-2 fw-bolder"><i
-                class="mdi mdi-brightness-4 fw-bold fs-1x d-block"></i>Dark</a>
+                class="mdi mdi-brightness-4 fw-bold fs-1x d-block modes-toggler"></i>Dark</a>
           </div>
         </div>
         <div class="border-top py-3">
@@ -129,13 +129,16 @@ export default {
 
       const $body = document.documentElement;
       const themeMode = localStorage.getItem('data-bs-theme');
+      const $icon = $body.querySelector('.modes-toggler');
 
       if(themeMode == 'light') {
-        localStorage.setItem('data-bs-theme', 'dark')
+        localStorage.setItem('data-bs-theme', 'dark');
+        $icon?.classList.add('mdi-brightness-4');
         return $body?.setAttribute('data-bs-theme', 'dark');
       }
+      $icon?.classList.remove('mdi-brightness-4');
       $body?.setAttribute('data-bs-theme', 'light');
-      localStorage.setItem('data-bs-theme', 'light')
+      localStorage.setItem('data-bs-theme', 'light');
     }
   },
   watch: {
