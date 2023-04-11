@@ -1,6 +1,6 @@
 # fdx-gallery
 
-This template should help get you started developing with Vue 3 in Vite.
+A small web application written in Vuejs/Firebase working as a web gallery, for storing images, videos, documents...with upload system without reloading the page.
 
 ## Recommended IDE Setup
 
