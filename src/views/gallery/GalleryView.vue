@@ -5,7 +5,30 @@ import lgThumbnail from 'lightgallery/plugins/thumbnail';
 import type { Photo } from '@/types/Media'
 </script>
 <template>
-  <div class="container-fluid bg-dark" style="min-height: 100vh;">
+  <div class="container-fluid bg-dark position-relative" style="min-height: 100vh;">
+    <div class="position-absolute bottom-0 end-0">
+      <div class="user_info bxs">
+        <div class="">
+          <p><a href="/my-gallery" class=""><i class="mdi mdi-home-circle-outline"></i>&nbsp;&nbsp; Home </a></p>
+          <div class="flex justify-sb">
+            <p><a href="/my-gallery/upload" class=""><i class="mdi mdi-cloud-upload"></i> Upload</a></p>
+            <p><a href="/user/logout" class=""><i class="mdi mdi-logout"></i> Logout</a></p>
+            <p><a href="javascript:void(0)"><i class="mdi mdi-cog"></i>Setting </a> </p>
+          </div>
+        </div>
+        <ul class="user_info_ul">
+          <li><u>Username</u> : BlakvGhost
+            <!-- <?php echo $_SESSION['user']['username'] ?> -->
+          </li>
+          <li><u>Storage</u> : BlakvGhost
+            <!-- <?php echo sumSize($_SESSION['user']['email']) ?> / 2 Go -->
+          </li>
+        </ul>
+      </div>
+      <div class="user_lg bxs">
+        <p class="m10"><i class="mdi mdi-account"></i> </p>
+      </div>
+    </div>
     <lightgallery class="row row-cols-1 row-cols-md-3" :settings="{ speed: 500, plugins: plugins, thumbnail: true }"
       :onInit="onInit" :onBeforeSlide="onBeforeSlide">
       <div v-for="item in photos" :key="item.id" :data-lg-size="item.size" className="gallery-item col my-3"
