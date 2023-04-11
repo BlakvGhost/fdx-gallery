@@ -14,7 +14,9 @@
   },
   "dependencies": {
     "bootstrap": "^5.2.3",
+    "dotenv": "^16.0.3",
     "dropzone": "^6.0.0-beta.2",
+    "firebase": "^9.19.1",
     "lightgallery": "^2.7.1",
     "pinia": "^2.0.32",
     "vue": "^3.2.47",
