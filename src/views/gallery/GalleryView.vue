@@ -7,7 +7,7 @@ import type { Photo } from '@/types/Media'
 <template>
   <div class="container-fluid bg-light position-relative" style="min-height: 100vh;">
     <div class="position-absolute bottom-0 end-0" style="z-index: 1000;">
-      <div class="p-4 m-3 shadow rounded bg-midnightblue transition-1x" style="font-size: 1.3rem;">
+      <div class="p-4 m-3 shadow rounded bg-midnightblue d-none fade-in-down" id="menuToDisplayUserMenu" style="font-size: 1.3rem;">
         <div class="my-2 d-flex justify-content-between">
           <a href="javascript:void(0)"
             class="text-decoration-none text-lightblue-hover-light text-lightblue fw-bolder mx-2"><i
@@ -43,8 +43,8 @@ import type { Photo } from '@/types/Media'
         </ul>
       </div>
       <div class="d-flex">
-        <div
-          class="mx-auto mb-3 shadow rounded-circle bg-midnightblue text-lightblue-hover-light text-lightblue text-center"
+        <div @click="displayUserOverlayMenu" id="btnToDisplayUserMenu"
+          class="mx-auto transition-1x mb-3 shadow rounded-circle bg-midnightblue text-lightblue-hover-light text-lightblue text-center"
           style="font-size: 4rem;height: 100px;width: 100px;">
           <i class="mdi mdi-account"></i>
         </div>
@@ -69,7 +69,8 @@ export default {
   data() {
     return {
       plugins: [lgZoom, lgThumbnail],
-      photos: Array<Photo>()
+      photos: Array<Photo>(),
+      displayOverlayMenu: false,
     }
   },
   mounted() {
@@ -112,8 +113,17 @@ export default {
       this.photos = [...this.photos]
       lightGallery.refresh()
     },
-    displayOverlayMenu: function () {
-
+    displayUserOverlayMenu: function () {
+      const icon = document.querySelector('#btnToDisplayUserMenu i');
+      const menu = document.querySelector('#menuToDisplayUserMenu');
+      if (!this.displayOverlayMenu) {
+        this.displayOverlayMenu = true;
+        icon?.classList.add('mdi-close-outline');
+        return menu?.classList.remove('d-none');
+      }
+      this.displayOverlayMenu = false;
+      icon?.classList.remove('mdi-close-outline');
+      menu?.classList.add('d-none');
     }
   },
   watch: {
