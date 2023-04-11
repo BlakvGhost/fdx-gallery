@@ -8,7 +8,7 @@ import type { Photo } from '@/types/Media'
   <div class="container-fluid bg-dark" style="min-height: 100vh;">
     <lightgallery class="row row-cols-1 row-cols-md-3" :settings="{ speed: 500, plugins: plugins, thumbnail: true }"
       :onInit="onInit" :onBeforeSlide="onBeforeSlide">
-      <div class="col" v-for="item in photos" :key="item.id" :data-lg-size="item.size" className="gallery-item"
+      <div v-for="item in photos" :key="item.id" :data-lg-size="item.size" className="gallery-item col my-3"
         :data-src="item.src">
         <img className="img-responsive" :src="item.thumbnail" :alt="item.alt" class="w-100 h-100" />
       </div>
