@@ -6,17 +6,28 @@ import type { Photo } from '@/types/Media'
 </script>
 <template>
   <div class="container-fluid bg-light position-relative" style="min-height: 100vh;">
-    <div class="position-absolute bottom-0 end-0">
-      <div class="p-4 m-3 shadow rounded bg-midnightblue" style="font-size: 1.3rem;">
+    <div class="position-absolute bottom-0 end-0" style="z-index: 1000;">
+      <div class="p-4 m-3 shadow rounded bg-midnightblue transition-1x" style="font-size: 1.3rem;">
+        <div class="my-2 d-flex justify-content-between">
+          <a href="javascript:void(0)"
+            class="text-decoration-none text-lightblue-hover-light text-lightblue fw-bolder mx-2"><i
+              class="mdi mdi-brightness-4 fw-bold fs-1x"></i></a>
+          <a href="javascript:void(0)" class="text-decoration-none text-lightblue text-lightblue-hover-light mb-4"><i
+              class="mdi mdi-home-circle-outline fw-bold fs-1x"></i></a>
+          <a href="javascript:void(0)"
+            class="text-decoration-none text-lightblue-hover-light text-lightblue fw-bolder mx-2"><i
+              class="mdi mdi-share-variant-outline fw-bold fs-1x"></i></a>
+        </div>
         <div class="text-center">
-          <a href="javascript:void(0)" class="text-decoration-none text-lightblue text-lightblue-hover-light my-2"><i
-              class="mdi mdi-home-circle-outline fw-bold fs-1x"></i>&nbsp;&nbsp; Home </a>
           <div class="d-flex justify-content-between">
-            <a href="javascript:void(0)" class="text-decoration-none text-lightblue-hover-light text-lightblue fw-bolder mx-2"><i
+            <a href="javascript:void(0)"
+              class="text-decoration-none text-lightblue-hover-light text-lightblue fw-bolder mx-2"><i
                 class="mdi mdi-cloud-upload fw-bold fs-1x d-block"></i> Upload</a>
-            <a href="javascript:void(0)" class="text-decoration-none text-lightblue-hover-light text-lightblue fw-bolder m-3"><i
+            <a href="javascript:void(0)"
+              class="text-decoration-none text-lightblue-hover-light text-lightblue fw-bolder m-3"><i
                 class="mdi mdi-logout fw-bold fs-1x d-block"></i> Logout</a>
-            <a href="javascript:void(0)" class="text-decoration-none text-lightblue-hover-light text-lightblue mx-2 fw-bolder"><i
+            <a href="javascript:void(0)"
+              class="text-decoration-none text-lightblue-hover-light text-lightblue mx-2 fw-bolder"><i
                 class="mdi mdi-cog fw-bold fs-1x d-block"></i>Setting </a>
           </div>
         </div>
@@ -31,14 +42,21 @@ import type { Photo } from '@/types/Media'
           </li>
         </ul>
       </div>
-      <div class="user_lg bxs">
-        <p class="m10"><i class="mdi mdi-account"></i> </p>
+      <div class="d-flex">
+        <div
+          class="mx-auto mb-3 shadow rounded-circle bg-midnightblue text-lightblue-hover-light text-lightblue text-center"
+          style="font-size: 4rem;height: 100px;width: 100px;">
+          <i class="mdi mdi-account"></i>
+        </div>
       </div>
     </div>
     <lightgallery class="row row-cols-1 row-cols-md-3" :settings="{ speed: 500, plugins: plugins, thumbnail: true }"
       :onInit="onInit" :onBeforeSlide="onBeforeSlide">
-      <div v-for="item in photos" :key="item.id" :data-lg-size="item.size" className="gallery-item col my-3"
-        :data-src="item.src">
+      <div v-for="item in photos" :key="item.id" :data-lg-size="item.size"
+        className="gallery-item position-relative col my-3" :data-src="item.src">
+        <div class="position-absolute d-none" style="left: 20px;top: 5px;">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+        </div>
         <img className="img-responsive" :src="item.thumbnail" :alt="item.alt" class="w-100 h-100" />
       </div>
     </lightgallery>
@@ -93,6 +111,9 @@ export default {
     updateSlides: function () {
       this.photos = [...this.photos]
       lightGallery.refresh()
+    },
+    displayOverlayMenu: function () {
+
     }
   },
   watch: {
@@ -107,4 +128,5 @@ export default {
 <style>
 @import 'lightgallery/css/lightgallery.css';
 @import 'lightgallery/css/lg-thumbnail.css';
-@import 'lightgallery/css/lg-zoom.css';</style>
+@import 'lightgallery/css/lg-zoom.css';
+</style>

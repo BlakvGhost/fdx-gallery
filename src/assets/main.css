@@ -16,3 +16,6 @@
     color: var(--bs-light);
     transition: .5s ease-in;
 }
+.transition-1x {
+    transition: .5s ease-in-out;
+}
